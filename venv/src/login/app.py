@@ -2,7 +2,7 @@
 
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
-import mysql.connector
+# import mysql.connector
 import MySQLdb.cursors
 import re
 
@@ -12,10 +12,13 @@ app = Flask(__name__)
 
 app.secret_key = 'xyzsabc'
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_HOST'] = 'mlopsmysql.mysql.database.azure.com'
+app.config['MYSQL_USER'] = 'sqladmin'
+app.config['MYSQL_PASSWORD'] = 'P@ssw0rd+1001'
 app.config['MYSQL_DB'] = 'geeklogin'
+app.config['MYSQL_DATABASE_PORT'] = '3306'
+
+# cnx = mysql.connector.connect(user="sqladmin", password="P@ssw0rd+1001", host="mlopsmysql.mysql.database.azure.com", port=3306, database="geeklogin", ssl_ca="{ca-cert filename}", ssl_disabled=False)
 
 mysql = MySQL(app)
 
@@ -28,11 +31,11 @@ def login():
 		password = request.form['password']
 		cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 		cursor.execute('SELECT * FROM accounts WHERE username = % s AND password = % s', (username, password, ))
-		accounts = cursor.fetchone()
-		if accounts:
+		account = cursor.fetchone()
+		if account:
 			session['loggedin'] = True
-			session['id'] = accounts['id']
-			session['username'] = accounts['username']
+			session['id'] = account['id']
+			session['username'] = account['username']
 			msg = 'Logged in successfully !'
 			return render_template('index.html', msg = msg)
 		else:
@@ -55,8 +58,8 @@ def register():
 		email = request.form['email']
 		cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 		cursor.execute('SELECT * FROM accounts WHERE username = % s', (username, ))
-		accounts = cursor.fetchone()
-		if accounts:
+		account = cursor.fetchone()
+		if account:
 			msg = 'Account already exists !'
 		elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
 			msg = 'Invalid email address !'
