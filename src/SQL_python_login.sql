@@ -1,3 +1,7 @@
+/*
+Using MySQL database.
+*/
+
 CREATE DATABASE IF NOT EXIST geeklogin DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE geeklogin;
 
@@ -9,6 +13,6 @@ CREATE TABLE IF NOT EXIST accounts (
     PRIMARY KEY (id)
     ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-INSERT INTO accounts (id, username, password, email) VALUES
-(1, 'Jhon smith', 'smith@webdamn.com', 'P@ssw0rd123'),
-(2, 'Adam William', 'adam@webdamn.com', 'P@ssw0rd123');
+INSERT INTO accounts (id, username, email, password) VALUES
+(1, 'jsmith', 'smith@webdamn.com', 'P@ssw0rd123'),
+(2, 'AdamWilliam', 'adam@webdamn.com', 'P@ssw0rd123');

@@ -2,7 +2,6 @@
 
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
-# import mysql.connector
 import MySQLdb.cursors
 import re
 
@@ -17,8 +16,6 @@ app.config['MYSQL_USER'] = 'sqladmin'
 app.config['MYSQL_PASSWORD'] = 'P@ssw0rd+1001'
 app.config['MYSQL_DB'] = 'geeklogin'
 app.config['MYSQL_DATABASE_PORT'] = '3306'
-
-# cnx = mysql.connector.connect(user="sqladmin", password="P@ssw0rd+1001", host="mlopsmysql.mysql.database.azure.com", port=3306, database="geeklogin", ssl_ca="{ca-cert filename}", ssl_disabled=False)
 
 mysql = MySQL(app)
 
