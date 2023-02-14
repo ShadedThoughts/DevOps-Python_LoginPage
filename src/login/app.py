@@ -8,9 +8,8 @@ import re
 
 app = Flask(__name__)
 
-
+# Connecting to the MySQL Database
 app.secret_key = 'xyzsabc'
-
 app.config['MYSQL_HOST'] = 'mlopsmysql.mysql.database.azure.com'
 app.config['MYSQL_USER'] = 'sqladmin'
 app.config['MYSQL_PASSWORD'] = 'P@ssw0rd+1001'
